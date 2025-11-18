@@ -5,16 +5,17 @@
 static lv_disp_draw_buf_t draw_buf;
 static lv_color_t buf[320 * 10];
 
-void flush_cb(lv_disp_drv_t *disp,
-              const lv_area_t *area,
-              lv_color_t *color_p) {
+static void flush_cb(lv_disp_drv_t *disp,
+                     const lv_area_t *area,
+                     lv_color_t *color_p) {
 
+    // Push image chunk to Cardputer display
     M5Cardputer.Display.pushImage(
         area->x1,
         area->y1,
         area->x2 - area->x1 + 1,
         area->y2 - area->y1 + 1,
-        (uint16_t *)color_p
+        (uint16_t*)color_p
     );
 
     lv_disp_flush_ready(disp);
@@ -23,6 +24,7 @@ void flush_cb(lv_disp_drv_t *disp,
 void initDisplay() {
     lv_init();
 
+    // Setup keyboard input group
     lv_group_t *g = lv_group_create();
     lv_group_set_default(g);
 
