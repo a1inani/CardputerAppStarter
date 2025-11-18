@@ -23,6 +23,9 @@ void flush_cb(lv_disp_drv_t *disp,
 void initDisplay() {
     lv_init();
 
+    lv_group_t *g = lv_group_create();
+    lv_group_set_default(g);
+
     lv_disp_draw_buf_init(&draw_buf, buf, NULL, 320 * 10);
 
     static lv_disp_drv_t disp_drv;
